@@ -4,6 +4,8 @@
 
 ![Product tour](docs/preview-demo.jpg)
 
+![The returns problem](docs/preview-returns.jpg)
+
 Static marketing site for **ToolFix AI**, a vertical AI after-sales diagnostics platform for
 power-tool brands selling across borders. Twelve pages, fifteen recorded product clips, and no
 runtime dependencies.
