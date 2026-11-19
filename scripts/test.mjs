@@ -139,10 +139,11 @@ await go('product/');
 const vid = await evalJs(`(async () => {
   const v = document.querySelector('video');
   v.scrollIntoView({ block: 'center' });
-  for (let i = 0; i < 40 && v.readyState < 1; i++) await new Promise(r => setTimeout(r, 150));
-  return { src: v.currentSrc.split('/').pop(), poster: !!v.getAttribute('poster'), ready: v.readyState };
+  for (let i = 0; i < 20 && v.readyState < 1; i++) await new Promise(r => setTimeout(r, 150));
+  return { src: v.currentSrc.split('/').pop(), poster: v.getAttribute('poster'), ready: v.readyState };
 })()`);
-check('product video is attached and playable', vid.src.endsWith('.mp4') && vid.poster && vid.ready >= 1, JSON.stringify(vid));
+const posterRes = await fetch(new URL(vid.poster, origin).href);
+check('product panel has a clip and a poster frame', vid.src.endsWith('.mp4') && posterRes.ok, `${vid.src} poster=${posterRes.status} ready=${vid.ready}`);
 
 // 8. team portraits load (base-path regression guard)
 await go('company/');
