@@ -29,10 +29,10 @@ export default {
   </div>
 </section>
 
-${sizing()}
+${sizing(ctx)}
 ${segments()}
 ${competition()}
-${gtm()}
+${gtm(ctx)}
 ${economics(l)}
 ${risks()}
 ${cta(l)}
@@ -40,7 +40,7 @@ ${cta(l)}
   },
 };
 
-function sizing() {
+function sizing(ctx) {
   const rows = [
     ['TAM', MARKET.tam, 'Power-tool and garden-tool store listings across Shopify and WooCommerce.'],
     ['SAM', MARKET.sam, 'Active Shopify sellers — the platform our order integration and token link serve today.'],
@@ -68,7 +68,7 @@ function sizing() {
         <tbody>${rows.map(([k, v, d]) => `<tr><td class="tbl__first">${k} · ${num(v)}</td><td>${d}</td></tr>`).join('')}</tbody>
       </table>
     </div>
-    <p class="sourceline">Store counts from Store Leads (2025), category-filtered. Contactability measured by sampling published store emails. Filter steps and query definitions are available in the investor data room.</p>`,
+    <p class="src" style="margin-top:14px">Returns economics behind this market: <a href="${href(ctx, 'returns/')}">the returns problem →</a></p><p class="sourceline">Store counts from Store Leads (2025), category-filtered. Contactability measured by sampling published store emails. Filter steps and query definitions are available in the investor data room.</p>`,
   });
 }
 
@@ -161,13 +161,23 @@ function competition() {
   });
 }
 
-function gtm() {
+function gtm(ctx) {
   return sec({
     tone: 'paper2',
     inner: `
     <div class="sechead sechead--split">
       <div>${eyebrow('Go to market')}<h2 class="h2">Two tracks that feed each other.</h2></div>
       <p class="lead">Factory validation produces the fault libraries that make the Shopify product good. Shopify revenue produces the case studies that open factory doors.</p>
+    </div>
+    <div class="grid grid-2" style="margin-bottom:28px">
+      <figure class="imgband">
+        <img src="${ctx.base}img/port.jpg" alt="Stylised illustration of shipping containers at dusk" style="aspect-ratio:16/9;object-fit:cover">
+        <figcaption class="imgband__cap">Shopify outbound — where the paying demand already behaves like software buyers</figcaption>
+      </figure>
+      <figure class="imgband">
+        <img src="${ctx.base}img/factory.jpg" alt="Stylised illustration of a power-tool assembly workshop" style="aspect-ratio:16/9;object-fit:cover">
+        <figcaption class="imgband__cap">Yongkang validation — where the manuals, fault cases and engineers are</figcaption>
+      </figure>
     </div>
     <div class="grid grid-2">
       <article class="card">

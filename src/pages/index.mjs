@@ -1,6 +1,8 @@
 import { icon, href } from '../lib/layout.mjs';
 import { VIDEOS, EVIDENCE, MARKET } from '../lib/data.mjs';
 import { eyebrow, btn, sec, statRow, bars, callout } from '../lib/ui.mjs';
+import { chatMockup, consoleMockup, guideMockup } from '../lib/mockups.mjs';
+import { barChart, hBars } from '../lib/charts.mjs';
 
 export default {
   path: '/',
@@ -10,7 +12,20 @@ export default {
     'ToolFix AI turns a manufacturer’s own manuals into a diagnostic agent that resolves false faults before they become returns, and escalates real ones to a human with the evidence attached. MVP live; pre-seed.',
   body: (ctx) => {
     const l = (p) => href(ctx, p);
-    return [hero(ctx, l), strip(), problem(ctx, l), loop(ctx, l), audiences(ctx, l), safety(), evidence(l), market(l), cta(l)].join('\n');
+    return [
+      hero(ctx, l),
+      strip(),
+      problem(ctx, l),
+      returnsBill(l),
+      showcase(ctx),
+      coverage(ctx),
+      loop(ctx, l),
+      safety(),
+      advantages(l),
+      evidence(l),
+      market(l),
+      cta(l),
+    ].join('\n');
   },
 };
 
@@ -72,7 +87,7 @@ function problem(ctx, l) {
     ${statRow([
       { value: '15', unit: '%', label: 'Category return rate benchmark', sub: 'The number our PRD benchmarks against' },
       { value: '40', unit: '%', label: 'Of surveyed problems are install / mode / setup class', sub: 'The part an AI can safely absorb' },
-      { value: 'USD 50–70', label: 'Lost on one avoidable return of an USD 80 tool', sub: 'Outbound freight, return freight, refund, re-listing discount' },
+      { value: 'USD 50–70', label: 'Lost on one avoidable return of an USD 80 tool', sub: 'Freight, refund, re-listing discount' },
       { value: '3–5×', label: 'Peak-season ticket volume vs. off-season', sub: 'Outdoor-equipment case: Shulex × Mammotion' },
     ])}
     <div class="grid grid-2-1" style="margin-top:34px">
@@ -101,6 +116,102 @@ function problem(ctx, l) {
   });
 }
 
+function returnsBill(l) {
+  const data = [
+    { x: '2021', value: 761 },
+    { x: '2022', value: 816 },
+    { x: '2023', value: 743 },
+    { x: '2024', value: 890 },
+  ];
+  return sec({
+    tone: 'white',
+    id: 'returns',
+    inner: `
+    <div class="sechead sechead--split">
+      <div>${eyebrow('The bill')}<h2 class="h2">USD 890 billion came back in the US last year.</h2></div>
+      <p class="lead">Returns are the most expensive way to learn a tool was fine. Roughly a fifth to a half of returned electronics show no fault when tested — and the seller pays the freight either way.</p>
+    </div>
+    <div class="grid grid-1-2" style="align-items:start">
+      <div>
+        <div class="bignum" style="margin-bottom:22px">
+          <span class="bignum__v">$890<em>bn</em></span>
+          <span class="bignum__l">returned in the US in 2024 — 16.9% of retail sales, and 17.6% of online orders.</span>
+        </div>
+        ${hBars([
+          { label: 'Cost to process a return', value: 27, display: '27% of price' },
+          { label: 'Returned electronics with no fault', value: 35, display: '20–50%' },
+          { label: 'Share of returns that are fraud', value: 15, display: '15.1%' },
+        ], { max: 60 })}
+        <p class="src">NRF × Happy Returns (2024) · Optoro (2024) · Appriss Retail / Deloitte (2024) · published no-fault-found estimates.</p>
+        <div style="margin-top:22px">${btn({ href: l('returns/'), label: 'The full data story', variant: 'primary', ic: 'arrow' })}</div>
+      </div>
+      <div class="figframe">
+        <h4>US retail returns, USD billions</h4>
+        <p class="figframe__sub">Growth outran retail sales; the rate rose from 16.6% to 16.9%.</p>
+        ${barChart(data, { unit: 'bn', height: 250 })}
+        <p class="src">NRF &amp; Happy Returns, December 2024; NRF &amp; Appriss Retail, December 2022.</p>
+      </div>
+    </div>`,
+  });
+}
+
+function showcase(ctx) {
+  return sec({
+    tone: '',
+    inner: `
+    <div class="sechead sechead--split">
+      <div>${eyebrow('The product')}<h2 class="h2">Two windows. One session record.</h2></div>
+      <p class="lead">The buyer never installs anything. The merchant never opens a second tool. Everything below is the shipped interface, rebuilt here as live HTML so it stays legible at any size.</p>
+    </div>
+    <div class="grid grid-2" style="gap:34px;align-items:start">
+      <div>
+        ${chatMockup(ctx, { caption: 'Buyer chat — the AI answers from the model’s own manual and shows the source. No login, no app.' })}
+      </div>
+      <div>
+        ${consoleMockup(ctx, { caption: 'Merchant console — self-resolution, interceptions and the handover queue in one view. Sample data.' })}
+      </div>
+    </div>
+    <div class="grid grid-3" style="margin-top:34px">
+      <article class="card card--tight"><div class="card__ic">${icon('lock')}</div><h3 class="h4">No account for the buyer</h3><p style="margin-top:6px">A token link bound to one order. Nothing to install, nothing to remember.</p></article>
+      <article class="card card--tight"><div class="card__ic">${icon('layers')}</div><h3 class="h4">Answers cite the manual</h3><p style="margin-top:6px">Every answer carries the source document it came from, so a merchant can audit it later.</p></article>
+      <article class="card card--tight"><div class="card__ic">${icon('users')}</div><h3 class="h4">Handover keeps the context</h3><p style="margin-top:6px">Symptoms, photos and ruled-out causes travel with the session when a human takes over.</p></article>
+    </div>`,
+  });
+}
+
+function coverage(ctx) {
+  const tools = [
+    ['tool-drill-2.jpg', 'FD1104071', 'Impact drill', '“It runs for two seconds then stops.”', 'Battery in transport-sleep mode'],
+    ['tool-grinder-2.jpg', 'FD1105075', 'Angle grinder', '“It overheats after a minute.”', 'Guard mounted the wrong way round'],
+    ['tool-drill.jpg', 'FD1104071-H', 'Rotary hammer', '“The bit spins but never hammers.”', 'Mode dial left between two detents'],
+    ['tool-grinder.jpg', 'AG-125', 'Angle grinder', '“The disc wobbles out of the box.”', 'Disc seated on the wrong flange'],
+  ];
+  return sec({
+    tone: '',
+    inner: `
+    <div class="sechead sechead--split">
+      <div>${eyebrow('Coverage')}<h2 class="h2">The same five questions, in every catalogue.</h2></div>
+      <p class="lead">False faults are not random. Across drills, hammers and grinders the same handful of setup mistakes produces most of the avoidable tickets — which is why a knowledge base of a few dozen scenarios covers a catalogue.</p>
+    </div>
+    <div class="grid grid-4">
+      ${tools
+        .map(
+          ([img, sku, name, ticket, cause]) => `<article class="toolcard">
+          <div class="toolcard__img"><img src="${ctx.base}img/${img}" alt="${name} ${sku}" loading="eager" decoding="async"></div>
+          <div class="toolcard__b">
+            <span class="toolcard__sku">${sku}</span>
+            <h3 class="h4">${name}</h3>
+            <p class="toolcard__q">${ticket}</p>
+            <p class="toolcard__a">${cause}</p>
+          </div>
+        </article>`,
+        )
+        .join('')}
+    </div>
+    <p class="src">Product photography from the founders’ own catalogue (HST). Model codes as they appear in the uploaded manuals.</p>`,
+  });
+}
+
 function loop(ctx, l) {
   const steps = [
     ['01', 'Signed entry', 'A token link bound to buyer, product and order. No sign-up, no password, no app.'],
@@ -124,60 +235,18 @@ function loop(ctx, l) {
       ${steps.map(([n, t, d]) => `<article class="step"><span class="step__n">${n}</span><h3>${t}</h3><p>${d}</p></article>`).join('')}
     </div>
     <div class="split" style="margin-top:52px">
-      <figure class="vpanel">
-        <div class="vpanel__glass">
-          <span class="vpanel__label">Live build · buyer session</span>
-          <video class="vpanel__video" muted playsinline loop autoplay preload="metadata" poster="${ctx.base}media/poster/token-link.jpg">
-            <source src="${ctx.base}media/video/token-link.mp4" type="video/mp4">
-          </video>
-        </div>
-      </figure>
       <div class="split__copy">
-        ${eyebrow('The entry is the product')}
-        <h3 class="h2" style="font-size:clamp(1.6rem,2.4vw,2.1rem)">No sign-up. The session already knows the SKU.</h3>
-        <p class="lead" style="margin-top:14px">Registration is where self-service dies. The merchant mints a unique link per order; the buyer taps it and starts describing the fault. Order number, model and warranty context are already there, so the first question can be the right one.</p>
+        ${eyebrow('The page that decides it')}
+        <h3 class="h2" style="font-size:clamp(1.6rem,2.4vw,2.1rem)">One instruction per screen. Two buttons at the end.</h3>
+        <p class="lead" style="margin-top:14px">41% of buyers asked for short video with annotated stills and 29% for step-by-step interaction; plain FAQ text satisfied 12%. So the guide page shows one action at a time and ends with “solved” or “not solved”.</p>
         <ul class="feats">
-          <li>${icon('check')}Bound to one buyer, one product, one order number</li>
-          <li>${icon('check')}Delivered by email, QR code or marketplace message</li>
-          <li>${icon('check')}Channel-agnostic — the same session behind any door</li>
-          <li>${icon('check')}English, Chinese, Spanish and Japanese buyer interfaces</li>
+          <li>${icon('check')}Annotated still for orientation, a clip for motion</li>
+          <li>${icon('check')}Tap-to-answer options instead of free text</li>
+          <li>${icon('check')}A visible safety line on every page</li>
+          <li>${icon('check')}“Solved” closes the session as an interception</li>
         </ul>
-        <div style="margin-top:26px">${btn({ href: l('product/'), label: 'Platform detail', variant: 'primary', ic: 'arrow' })}</div>
       </div>
-    </div>`,
-  });
-}
-
-function audiences(ctx, l) {
-  return sec({
-    tone: 'paper2',
-    inner: `
-    <div class="sechead sechead--split">
-      <div>
-        ${eyebrow('Two audiences, one record')}
-        <h2 class="h2">The buyer gets an answer. The seller gets the evidence.</h2>
-      </div>
-      <p class="lead">Every session is stored against the order: transcript, photos, confidence, verdict and outcome. Nothing has to be re-explained when a human steps in.</p>
-    </div>
-    <div class="grid grid-2">
-      <article class="card" style="padding:0;overflow:hidden">
-        <img src="${ctx.base}media/poster/customers-sessions.jpg" alt="ToolFix AI console showing buyers in human support" style="width:100%;border-bottom:1px solid var(--line)" loading="lazy">
-        <div style="padding:24px">
-          <span class="vcard__cat">Merchant console</span>
-          <h3 class="h3" style="margin:8px 0 8px">A queue that tells you what needs you</h3>
-          <p style="font-size:.88rem;color:var(--muted);margin-bottom:18px">Sessions flagged for hand-over rise to the top with an email alert. Self-resolved sessions close quietly. The dashboard measures what the pilot was supposed to prove — self-resolution rate, interception count, latency.</p>
-          ${btn({ href: l('product/#console'), label: 'Console features', variant: 'line', ic: 'arrow', size: 'sm' })}
-        </div>
-      </article>
-      <article class="card" style="padding:0;overflow:hidden">
-        <img src="${ctx.base}media/poster/human-handover.jpg" alt="ToolFix AI console showing a live human takeover" style="width:100%;border-bottom:1px solid var(--line)" loading="lazy">
-        <div style="padding:24px">
-          <span class="vcard__cat">Handover</span>
-          <h3 class="h3" style="margin:8px 0 8px">A takeover that does not restart the conversation</h3>
-          <p style="font-size:.88rem;color:var(--muted);margin-bottom:18px">Symptoms, photos, suspected part and ruled-out causes travel with the session. The agent replies in the same window the buyer is already looking at, then hands it back — the AI resumes when they leave.</p>
-          ${btn({ href: l('product/#handover'), label: 'How handover works', variant: 'line', ic: 'arrow', size: 'sm' })}
-        </div>
-      </article>
+      ${guideMockup(ctx, { caption: 'Self-fix guide — step 2 of 4, with the manual’s own illustration and a one-tap confirmation.' })}
     </div>`,
   });
 }
@@ -193,7 +262,7 @@ function safety() {
       <p class="lead" style="color:#a9b6c5">A keyword tripwire runs outside the model. When it fires, diagnosis stops, a safety notice displays, and the buyer goes to a human — every time, in acceptance tests and in production.</p>
     </div>
     <div class="grid grid-2-1" style="align-items:start">
-      <div class="figure">
+      <div class="figframe figframe--dark">
         <h4>Scenarios enterprises insist a human must handle <span style="color:#6d7c8f">(n = 50, multi-select)</span></h4>
         ${bars(EVIDENCE.safety, { tone: 'dark' })}
       </div>
@@ -203,14 +272,56 @@ function safety() {
         ${callout({ label: 'Design principle', body: 'Better to escalate than to guess. A wrong answer about a cutting disc is not an accuracy problem — it is a liability.', tone: 'dark' })}
       </div>
     </div>
-    <p class="sourceline">Source: founder survey of 100 respondents, 50 of them enterprise staff and technicians (Sept 2026). Multi-select question on mandatory human handling.</p>
+    <p class="sourceline">Source: founder survey of 100 respondents, 50 of them enterprise staff and technicians (Sept 2026).</p>
   </div>
 </section>`;
+}
+
+function advantages(l) {
+  const rows = [
+    ['Knows which SKU the buyer owns', '<span class="no">No</span>', '<span class="no">No</span>', '<span class="no">No</span>', '<span class="yes">Order-bound token link</span>'],
+    ['Answers only from your manual', '<span class="no">No</span>', '<span class="part">Sometimes</span>', '<span class="no">No</span>', '<span class="yes">Retrieval + fallback script</span>'],
+    ['Hard safety stop outside the model', '<span class="no">No</span>', '<span class="no">No</span>', '<span class="part">Policy only</span>', '<span class="yes">Deterministic tripwire</span>'],
+    ['Hands over with a diagnostic summary', '<span class="part">Manual</span>', '<span class="yes">Yes</span>', '<span class="no">No</span>', '<span class="yes">Built into the queue</span>'],
+    ['Measures interception, not CSAT', '<span class="no">No</span>', '<span class="no">No</span>', '<span class="no">No</span>', '<span class="yes">Session-level record</span>'],
+    ['Works for a 5-person seller', '<span class="part">Effort</span>', '<span class="yes">Yes</span>', '<span class="no">No</span>', '<span class="yes">From ¥399/mo</span>'],
+  ];
+  const cards = [
+    ['shield', 'Safety you can audit', 'The tripwire is a keyword table in application code, not an instruction in a prompt. Every trip is logged with the matched term.'],
+    ['target', 'Narrow on purpose', 'Power tools and garden tools only. Fault trees, safety rules and manuals for one category, not every category.'],
+    ['clock', 'Cheaper than a ticket', 'Roughly ¥0.3–0.8 of model and hosting spend per five-round session, against a ¥399 monthly floor.'],
+    ['route', 'It ends in a record', 'Every session stores the transcript, source, confidence and verdict — the evidence a pilot review needs.'],
+  ];
+  return sec({
+    tone: 'paper2',
+    inner: `
+    <div class="sechead sechead--split">
+      <div>${eyebrow('Why it works')}<h2 class="h2">A vertical diagnostic layer, not another inbox.</h2></div>
+      <p class="lead">Generic helpdesks automate tickets. Generic chatbots answer questions. Neither is allowed to decide that a cutting disc is fine.</p>
+    </div>
+    <div class="tblwrap">
+      <table class="compare">
+        <thead><tr><th>Capability</th><th>Manual / FAQ</th><th>Generic chatbot</th><th>E-commerce helpdesk</th><th class="is-self">ToolFix AI</th></tr></thead>
+        <tbody>
+          ${rows.map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="is-self">${r[4]}</td></tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div class="grid grid-4" style="margin-top:30px">
+      ${cards
+        .map(
+          ([ic, t, d]) => `<article class="card"><div class="card__ic">${icon(ic)}</div><h3 class="h4">${t}</h3><p style="margin-top:7px;font-size:.85rem">${d}</p></article>`,
+        )
+        .join('')}
+    </div>
+    <div style="margin-top:26px">${btn({ href: l('product/'), label: 'Platform detail', variant: 'line', ic: 'arrow' })}</div>`,
+  });
 }
 
 function evidence(l) {
   return sec({
     id: 'evidence',
+    tone: 'white',
     inner: `
     <div class="sechead sechead--split">
       <div>
@@ -248,7 +359,7 @@ function market(l) {
     ['Year-one list', '~950', 'Priority English-speaking markets, worked through personalised outbound'],
   ];
   return sec({
-    tone: 'white',
+    tone: 'paper2',
     inner: `
     <div class="grid grid-1-2" style="align-items:start">
       <div>
@@ -280,7 +391,7 @@ function cta(l) {
     </div>
     <div class="cta__acts">
       ${btn({ href: l('pricing/#pilot'), label: 'Book a pilot', variant: 'onDark', ic: 'arrow' })}
-      ${btn({ href: l('demo/'), label: 'Watch 15 product clips', variant: 'ghostDark', ic: 'play' })}
+      ${btn({ href: l('demo/'), label: 'Watch the product clips', variant: 'ghostDark', ic: 'play' })}
       <p class="cta__fine">Or email the founders: kuangqisun@gmail.com</p>
     </div>
   </div>

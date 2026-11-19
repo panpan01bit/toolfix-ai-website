@@ -115,6 +115,7 @@ function header(ctx) {
       <nav class="mmenu__nav" aria-label="Mobile">
         ${NAV.map(([path, label]) => `<a href="${href(ctx, path)}">${label}${icon('arrowUpRight')}</a>`).join('')}
         <a href="${href(ctx, 'demo/')}">Product tour${icon('arrowUpRight')}</a>
+        <a href="${href(ctx, 'returns/')}">The returns problem${icon('arrowUpRight')}</a>
         <a href="${href(ctx, 'faq/')}">FAQ${icon('arrowUpRight')}</a>
         <a href="${href(ctx, 'zh/')}">中文简介${icon('arrowUpRight')}</a>
       </nav>
@@ -145,6 +146,7 @@ function footer(ctx) {
         ['product/', 'Platform'],
         ['technology/', 'Technology'],
         ['demo/', 'Product tour'],
+        ['returns/', 'The returns problem'],
         ['pricing/', 'Pricing'],
         ['faq/', 'FAQ'],
       ])}

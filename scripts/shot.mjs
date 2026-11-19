@@ -93,6 +93,17 @@ if (width < 700) {
 await send('Page.navigate', { url }, sessionId);
 await sleep(2600);
 
+// scroll through the page so lazy images and media load before capture
+await send('Runtime.evaluate', {
+  expression: `(async () => {
+    const h = document.documentElement.scrollHeight;
+    for (let y = 0; y < h; y += 700) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 90)); }
+    window.scrollTo(0, 0);
+    await new Promise(r => setTimeout(r, 500));
+  })()`,
+  awaitPromise: true,
+}, sessionId);
+
 const { result } = await send('Runtime.evaluate', {
   expression: 'JSON.stringify({w: document.documentElement.scrollWidth, h: document.documentElement.scrollHeight, iw: window.innerWidth})',
   returnByValue: true,

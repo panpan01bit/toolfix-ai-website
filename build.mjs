@@ -34,6 +34,7 @@ const PAGES = [
   'pricing',
   'market',
   'investors',
+  'returns',
   'company',
   'faq',
   'zh',

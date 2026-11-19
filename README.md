@@ -19,6 +19,7 @@ runtime dependencies.
 | `/product/` | Platform — buyer session, guide pages, knowledge engine, handover, console |
 | `/technology/` | Architecture, RAG pipeline, safety rule, data model, security, acceptance gates |
 | `/demo/` | Product tour — 15 filterable recordings of the deployed build |
+| `/returns/` | The returns problem — industry data, charts and sources (NRF, Appriss, Optoro, NFF) |
 | `/pricing/` | Four plans, comparison table, ROI calculator, pilot process, billing FAQ |
 | `/market/` | Bottom-up sizing, segments, competition, GTM, unit economics, risks |
 | `/investors/` | What is proven vs assumed, why now, milestones, use of funds, data room |
@@ -71,6 +72,14 @@ The source material was fifteen green-screen `.mov` captures (1462×806, 120 fps
 5. cuts short `loop-*` and `hero-loop` versions that begin at the busiest moment, so inline panels never open on an empty screen.
 
 Re-run with `./scripts/encode-videos.sh` after editing the clip table in that script.
+
+## Imagery
+
+Product illustrations (warehouse, port, workshop, factory, texture) are generated with
+**Zhipu CogView-3-Flash** from prompts written to the brand palette, then downscaled and
+re-compressed. Tool photography comes from the founders' own catalogue (HST) as supplied in the
+manual package. Product screens are **not** images: the buyer chat, guide page and console are
+live HTML/CSS mockups (`src/lib/mockups.mjs`) so they stay sharp at any size.
 
 ## Claims and sourcing
 

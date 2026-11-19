@@ -1,6 +1,7 @@
 import { icon, href } from '../lib/layout.mjs';
 import { eyebrow, btn, sec, secHead, videoPanel, videoCard, bars, callout, table, note, pills, eyebrow as eb } from '../lib/ui.mjs';
 import { VIDEOS } from '../lib/data.mjs';
+import { chatMockup, guideMockup, consoleMockup } from '../lib/mockups.mjs';
 
 const v = (s) => VIDEOS.find((x) => x.slug === s);
 
@@ -30,7 +31,7 @@ export default {
 
 ${surfaces(ctx, l)}
 ${buyerJourney(ctx)}
-${guidePages()}
+${guidePages(ctx)}
 ${knowledge(ctx)}
 ${handover(ctx)}
 ${consoleSection(ctx)}
@@ -80,7 +81,7 @@ function buyerJourney(ctx) {
         </div>
         <p class="note" style="margin-top:16px">If any round fails, the buyer returns to the loop; at five rounds, low confidence or negative feedback, the session moves to a human automatically.</p>
       </div>
-      ${videoPanel(ctx, 'ai-diagnosis', { caption: 'Recording of the live build: a buyer session from first message to verdict.', label: 'Buyer chat' })}
+      ${chatMockup(ctx, { caption: 'The buyer session, rebuilt as live HTML: question, cited answer, quick replies and the guide card.' })}
     </div>
     <div class="kv" style="margin-top:34px">
       <div class="kv__i"><p class="kv__k">Entry</p><p class="kv__v">Token link per order</p></div>
@@ -92,7 +93,7 @@ function buyerJourney(ctx) {
   });
 }
 
-function guidePages() {
+function guidePages(ctx) {
   const rules = [
     ['Less input, always', 'Buyers answer by tapping options. Every free-text field is a chance to lose someone who is already frustrated.'],
     ['One question at a time', 'A page never presents two steps at once. The 68% who grant us five minutes spend them moving, not reading.'],
@@ -106,8 +107,13 @@ function guidePages() {
       <div>${eyebrow('Self-fix guide pages')}<h2 class="h2">The page where a session succeeds or collapses.</h2></div>
       <p class="lead">Format follows the data: 41% of buyers prefer short video with annotated stills, 29% want interactive steps, and plain FAQ text satisfies 12%. So each page pairs an annotated still for orientation with a clip for motion — and ends with exactly two buttons.</p>
     </div>
-    <div class="grid grid-3">
-      ${rules.map(([t, d], i) => `<article class="card"><span class="step__n">0${i + 1}</span><h3 class="h3" style="margin:12px 0 8px">${t}</h3><p>${d}</p></article>`).join('')}
+    <div class="split" style="margin-bottom:34px">
+      <div>
+        <div class="grid" style="gap:14px">
+          ${rules.map(([t, d], i) => `<article class="card card--tight"><span class="step__n">0${i + 1}</span><h3 class="h4" style="margin:8px 0 6px">${t}</h3><p style="font-size:.85rem">${d}</p></article>`).join('')}
+        </div>
+      </div>
+      ${guideMockup(ctx, { caption: 'Step 2 of 4: one instruction, the manual’s own illustration, and exactly two ways out.' })}
     </div>
     <div class="grid grid-2" style="margin-top:24px">
       <div class="figure">
