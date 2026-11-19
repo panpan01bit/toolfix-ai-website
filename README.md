@@ -1,5 +1,9 @@
 # ToolFix AI — marketing site
 
+![Home page](docs/preview-home.jpg)
+
+![Product tour](docs/preview-demo.jpg)
+
 Static marketing site for **ToolFix AI**, a vertical AI after-sales diagnostics platform for
 power-tool brands selling across borders. Twelve pages, fifteen recorded product clips, and no
 runtime dependencies.
