@@ -15,7 +15,6 @@ export default {
 };
 
 function hero(ctx, l) {
-  const v = VIDEOS[0];
   return `<section class="hero">
   <div class="hero__grid"></div><div class="hero__glow"></div>
   <div class="wrap hero__in">
@@ -36,8 +35,8 @@ function hero(ctx, l) {
     <div class="hero__media">
       <div class="hero__frame">
         <div class="hero__chrome"><i></i><i></i><i></i><span>buyer session · token link · EN</span></div>
-        <video muted playsinline loop autoplay preload="metadata" poster="${ctx.base}media/poster/${v.slug}.jpg" aria-label="Recording of an AI diagnostic session with a buyer">
-          <source src="${ctx.base}media/video/${v.slug}.mp4" type="video/mp4">
+        <video muted playsinline loop autoplay preload="metadata" poster="${ctx.base}media/poster/hero-loop.jpg" aria-label="Recording of an AI diagnostic session answering a buyer question from the manual">
+          <source src="${ctx.base}media/video/hero-loop.mp4" type="video/mp4">
         </video>
       </div>
       <div class="hero__tag">

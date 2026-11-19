@@ -32,7 +32,7 @@ CLIPS=(
 )
 
 # key + grade + composite onto flat brand surface
-grade="trim=start=1.2,setpts=PTS-STARTPTS,format=rgb24,colorkey=0x667F49:0.10:0.02,eq=contrast=1.44:brightness=0.055:saturation=1.06,scale=1440:794:flags=lanczos"
+grade="trim=start=1.2,setpts=PTS-STARTPTS,format=rgb24,colorkey=0x667F49:0.10:0.02,colorlevels=rimin=0.03:rimax=0.63:gimin=0.03:gimax=0.63:bimin=0.03:bimax=0.63,eq=saturation=1.06:brightness=0.005,scale=1440:794:flags=lanczos"
 # per-clip crop (w:h:x:y in 1440x794 space) keeps the app window filling the frame
 
 for entry in "${CLIPS[@]}"; do
