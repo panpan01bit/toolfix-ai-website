@@ -136,15 +136,18 @@ check('no horizontal overflow at 390px', overflow <= 0, `overflow=${overflow}px`
 // 7. inline videos have a playable source and poster
 await send('Emulation.clearDeviceMetricsOverride', {}, sessionId);
 await go('product/');
-const vid = await evalJs(`(() => {
+const vid = await evalJs(`(async () => {
   const v = document.querySelector('video');
+  v.scrollIntoView({ block: 'center' });
+  for (let i = 0; i < 40 && v.readyState < 1; i++) await new Promise(r => setTimeout(r, 150));
   return { src: v.currentSrc.split('/').pop(), poster: !!v.getAttribute('poster'), ready: v.readyState };
 })()`);
 check('product video is attached and playable', vid.src.endsWith('.mp4') && vid.poster && vid.ready >= 1, JSON.stringify(vid));
 
 // 8. team portraits load (base-path regression guard)
 await go('company/');
-const team = await evalJs(`(() => {
+const team = await evalJs(`(async () => {
+  for (let i = 0; i < 30 && document.readyState !== 'complete'; i++) await new Promise(r => setTimeout(r, 150));
   const imgs = [...document.querySelectorAll('.member__img')];
   return { count: imgs.length, srcs: imgs.map(i => i.getAttribute('src')) };
 })()`);

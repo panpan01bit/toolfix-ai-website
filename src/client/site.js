@@ -63,6 +63,21 @@
   var inline = d.querySelectorAll('[data-inline-tour]');
   inline.forEach(function (v) {
     v.muted = true;
+    var start = parseFloat(v.getAttribute('data-start') || '0');
+    if (start > 0) {
+      var seek = function () {
+        if (v.currentTime < start - 0.2) v.currentTime = start;
+      };
+      // metadata may already be loaded by the time this script runs
+      if (v.readyState >= 1) seek();
+      v.addEventListener('loadedmetadata', seek);
+    }
+    // manual loop from the content-rich offset, so a loop never opens on an empty screen
+    v.addEventListener('ended', function () {
+      v.currentTime = start;
+      var r = v.play();
+      if (r && r.catch) r.catch(function () {});
+    });
     var p = v.play();
     if (p && p.catch) p.catch(function () {});
     if ('IntersectionObserver' in window) {

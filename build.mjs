@@ -152,6 +152,28 @@ function serve() {
         const ext = file.slice(file.lastIndexOf('.'));
         res.setHeader('Content-Type', types[ext] || 'application/octet-stream');
         res.setHeader('Cache-Control', 'no-store');
+        res.setHeader('Accept-Ranges', 'bytes');
+        // byte ranges, so locally-served video behaves like GitHub Pages
+        const range = req.headers.range;
+        if (range) {
+          const m = /bytes=(\d*)-(\d*)/.exec(range);
+          if (m) {
+            const start = m[1] ? Number(m[1]) : 0;
+            const end = m[2] ? Number(m[2]) : buf.length - 1;
+            if (start >= buf.length) {
+              res.statusCode = 416;
+              res.setHeader('Content-Range', `bytes */${buf.length}`);
+              res.end();
+              return;
+            }
+            res.statusCode = 206;
+            res.setHeader('Content-Range', `bytes ${start}-${end}/${buf.length}`);
+            res.setHeader('Content-Length', String(end - start + 1));
+            res.end(buf.subarray(start, end + 1));
+            return;
+          }
+        }
+        res.setHeader('Content-Length', String(buf.length));
         res.end(buf);
       } catch {
         res.statusCode = 404;

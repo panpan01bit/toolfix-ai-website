@@ -67,7 +67,8 @@ The source material was fifteen green-screen `.mov` captures (1462×806, 120 fps
 1. trims the one-second fade-in,
 2. keys the flat green backdrop (`colorkey`) and grades the dim UI for legibility,
 3. crops to the app window and composites on the site surface colour `#0E1526`,
-4. exports H.264 MP4 (1440×794, 30 fps, CRF 23, faststart, no audio) plus a poster frame.
+4. exports H.264 MP4 (1440×794, 30 fps, CRF 23, faststart, no audio) plus a poster frame;
+5. cuts short `loop-*` and `hero-loop` versions that begin at the busiest moment, so inline panels never open on an empty screen.
 
 Re-run with `./scripts/encode-videos.sh` after editing the clip table in that script.
 

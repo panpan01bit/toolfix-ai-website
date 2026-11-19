@@ -62,11 +62,14 @@ export function videoCard(ctx, v, { big = false } = {}) {
 }
 
 export function videoPanel(ctx, slug, { caption = '', label = '', flip = false, autoplay = true, cls = '' } = {}) {
+  // Loops start at the content-rich moment of a clip (see scripts/encode-videos.sh).
+  const looped = ['ai-diagnosis', 'token-link', 'pdf-parsing', 'grounded-answers', 'chrome-workbench'].includes(slug);
+  const src = looped ? 'loop-' + slug : slug;
   return `<figure class="vpanel ${flip ? 'vpanel--flip' : ''} ${cls}">
     <div class="vpanel__glass">
       ${label ? `<span class="vpanel__label">${label}</span>` : ''}
-      <video class="vpanel__video" muted playsinline loop ${autoplay ? 'autoplay' : ''} preload="metadata" poster="${ctx.base}media/poster/${slug}.jpg" data-inline-tour>
-        <source src="${ctx.base}media/video/${slug}.mp4" type="video/mp4">
+      <video class="vpanel__video" muted playsinline ${autoplay ? 'autoplay' : ''} preload="metadata" poster="${ctx.base}media/poster/${src}.jpg" data-inline-tour data-start="0">
+        <source src="${ctx.base}media/video/${src}.mp4" type="video/mp4">
       </video>
     </div>
     ${caption ? `<figcaption class="vpanel__cap">${caption}</figcaption>` : ''}

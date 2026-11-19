@@ -486,3 +486,15 @@ export const MILESTONES = [
     state: 'plan',
   },
 ];
+
+/** Point where each clip becomes visually busy — inline panels start here so a
+ *  loop never opens on an empty screen. */
+export const PANEL_START = {
+  'ai-diagnosis': 9.6,
+  'token-link': 4.0,
+  'pdf-parsing': 6.0,
+  'knowledge-base': 0.0,
+  'grounded-answers': 6.0,
+  'human-handover': 0.0,
+  'chrome-workbench': 7.0,
+};
