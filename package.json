@@ -1,0 +1,15 @@
+{
+  "name": "toolfix-ai-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Marketing site for ToolFix AI — vertical AI after-sales diagnostics for power-tool brands going global.",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs --watch",
+    "serve": "node build.mjs --serve"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
