@@ -180,7 +180,7 @@ function footer(ctx) {
 
 /* ------------------------------------------------------------------- page */
 export function page(html, ctx) {
-  const { title, description, path = '/', nav = '', bodyClass = '', noindex = false } = html;
+  const { title, description, path = '/', nav = '', bodyClass = '', noindex = false, lang = 'en' } = html;
   const canonical = `${ctx.sitePathRoot}${path.replace(/^\//, '')}`;
   const ogImage = `${ctx.sitePathRoot}img/og.jpg`;
 
@@ -188,7 +188,7 @@ export function page(html, ctx) {
   const body = typeof html.body === 'function' ? html.body(ctx) : html.body;
 
   return `<!doctype html>
-<html lang="en">
+<html lang="${lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

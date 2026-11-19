@@ -11,6 +11,7 @@ export default {
   description:
     'ToolFix AI 是面向电动工具出海商家的 AI 售后诊断 SaaS：上传说明书构建知识库，买家通过专属链接自助排查，假故障当场解决，真故障和安全隐患转人工。MVP 已上线，pre-seed。',
   bodyClass: 'zh',
+  lang: 'zh-CN',
   body: (ctx) => {
     const l = (p) => href(ctx, p);
     return `
