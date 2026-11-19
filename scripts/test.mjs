@@ -80,13 +80,16 @@ const filtered = await evalJs(`(() => {
 check('demo filter narrows to onboarding clips', filtered.visible === 3 && filtered.on, JSON.stringify(filtered));
 
 // 2. lightbox opens with a video source
-const lb = await evalJs(`(() => {
+const lb = await evalJs(`(async () => {
   document.querySelector('[data-play]').click();
   const box = document.querySelector('[data-lb]');
   const v = document.querySelector('[data-lb-video]');
-  return { open: box.classList.contains('is-open'), src: (v.getAttribute('src') || '').split('/').pop() };
+  await new Promise(r => setTimeout(r, 1200));
+  return { open: box.classList.contains('is-open'), src: v.getAttribute('src') || '', base: new URL('${origin}').pathname, error: v.error ? v.error.code : null, ready: v.readyState };
 })()`);
-check('lightbox opens a product clip', lb.open && lb.src.endsWith('.mp4'), JSON.stringify(lb));
+check('lightbox opens a product clip', lb.open && lb.src.includes(lb.base) && lb.src.endsWith('.mp4'), lb.src);
+const lbRes = await fetch(lb.src.startsWith('http') ? lb.src : new URL(lb.src, origin).href);
+check('lightbox video URL resolves', lbRes.ok && lb.error === null, `${lbRes.status} ready=${lb.ready}`);
 
 // 3. FAQ accordion + search
 await go('faq/');
@@ -138,6 +141,15 @@ const vid = await evalJs(`(() => {
   return { src: v.currentSrc.split('/').pop(), poster: !!v.getAttribute('poster'), ready: v.readyState };
 })()`);
 check('product video is attached and playable', vid.src.endsWith('.mp4') && vid.poster && vid.ready >= 1, JSON.stringify(vid));
+
+// 8. team portraits load (base-path regression guard)
+await go('company/');
+const team = await evalJs(`(() => {
+  const imgs = [...document.querySelectorAll('.member__img')];
+  return { count: imgs.length, srcs: imgs.map(i => i.getAttribute('src')) };
+})()`);
+const teamStatus = await Promise.all(team.srcs.map(async (src) => (await fetch(new URL(src, origin).href)).status));
+check('team portraits resolve under the deployment base', team.count === 2 && teamStatus.every((s) => s === 200), `${teamStatus.join(',')} ${team.srcs.join(' ')}`);
 
 const failed = results.filter((r) => !r.pass).length;
 console.log(`\n${results.length - failed}/${results.length} checks passed`);

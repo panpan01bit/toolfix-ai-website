@@ -26,7 +26,7 @@ export default {
 </section>
 
 ${story(ctx)}
-${team()}
+${team(ctx)}
 ${principles()}
 ${research()}
 ${support()}
@@ -57,12 +57,12 @@ function story(ctx) {
   });
 }
 
-function team() {
+function team(ctx) {
   const members = [
     {
       name: 'Kuangqi Sun',
       role: 'Co-founder — Business, Finance & Market Strategy',
-      img: '/img/team-kuangqi.jpg',
+      img: `${ctx.base}img/team-kuangqi.jpg`,
       bio: [
         'Owns the business plan, pricing research, market sizing and the financial model, and leads competitor analysis and pilot commercial terms.',
         'Bachelor of Commerce (Accounting major), University of New South Wales, class of 2027 — coursework in corporate reporting, management accounting, business analytics and international business.',
@@ -74,7 +74,7 @@ function team() {
     {
       name: 'Zihan (Edwin) Nan',
       role: 'Co-founder — Product Content, User Research & Brand',
-      img: '/img/team-edwin.jpg',
+      img: `${ctx.base}img/team-edwin.jpg`,
       bio: [
         'Designed and ran the 100-person survey programme and interview guides; produces the buyer-facing self-fix guide pages, product documentation and all brand visuals.',
         'Digital Culture major with a Visual Art minor at the University of Sydney, after a foundation year at HKU SPACE — coursework in internet culture, platform mechanisms and technology–society relations.',

@@ -92,6 +92,7 @@
     if (!lb || !lbVideo) return;
     lastFocus = d.activeElement;
     lbTitle.textContent = title || '';
+    lbVideo.poster = base + 'media/poster/' + slug + '.jpg';
     lbVideo.src = base + 'media/video/' + slug + '.mp4';
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
@@ -106,6 +107,7 @@
     lb.setAttribute('aria-hidden', 'true');
     lbVideo.pause();
     lbVideo.removeAttribute('src');
+    lbVideo.removeAttribute('poster');
     lbVideo.load();
     d.body.style.overflow = '';
     if (lastFocus) lastFocus.focus();

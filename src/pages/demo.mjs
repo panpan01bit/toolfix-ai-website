@@ -72,7 +72,7 @@ ${sec({
       <h3 data-lb-title>Product clip</h3>
       <button class="lb__close" type="button" data-lb-close aria-label="Close video">${icon('close')}</button>
     </div>
-    <video data-lb-video controls playsinline preload="none"></video>
+    <video data-lb-video controls playsinline preload="metadata"></video>
     <p class="lb__hint">Recorded from the deployed build · press Esc to close</p>
   </div>
 </div>

@@ -48,7 +48,7 @@ export function videoCard(ctx, v, { big = false } = {}) {
   const mins = Math.floor(v.dur / 60);
   const secs = String(Math.round(v.dur % 60)).padStart(2, '0');
   return `<figure class="vcard${big ? ' vcard--big' : ''}" data-cat="${v.cat}">
-    <button class="vcard__frame" type="button" data-play="${v.slug}" data-title="${esc(v.title)}" aria-label="Play: ${esc(v.title)}">
+    <button class="vcard__frame" type="button" data-play="${v.slug}" data-title="${esc(v.title)}" data-base="${ctx.base}" aria-label="Play: ${esc(v.title)}">
       <img src="${ctx.base}media/poster/${v.slug}.jpg" alt="Screenshot of ${esc(v.title)} in the ToolFix AI product" width="1440" height="794" loading="lazy">
       <span class="vcard__play">${icon('play')}</span>
       <span class="vcard__dur">${mins}:${secs}</span>
