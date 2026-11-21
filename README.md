@@ -77,8 +77,11 @@ Re-run with `./scripts/encode-videos.sh` after editing the clip table in that sc
 
 ## Imagery
 
-Product illustrations (warehouse, port, workshop, factory, texture) are generated with
-**Zhipu CogView-3-Flash** from prompts written to the brand palette, then downscaled and
+Kimi K3.1 (Moonshot) was tested and **cannot generate images** — `/images/generations` returns
+404 and every model reports `modalities.output = ["text"]`. It is used only for text/vision work.
+
+Photographic imagery (warehouse, port, factory, doorstep, workbench) is generated with
+**Zhipu CogView-3-Flash** using photorealistic prompts from prompts written to the brand palette, then downscaled and
 re-compressed. Tool photography comes from the founders' own catalogue (HST) as supplied in the
 manual package. Product screens are **not** images: the buyer chat, guide page and console are
 live HTML/CSS mockups (`src/lib/mockups.mjs`) so they stay sharp at any size.

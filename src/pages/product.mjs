@@ -45,9 +45,9 @@ ${cta(l)}
 
 function surfaces(ctx, l) {
   const items = [
-    ['Buyer surface', 'chat', 'A single page behind a signed link. No registration, no password, no app install. English, Chinese, Spanish or Japanese, chosen by the merchant.'],
-    ['Knowledge engine', 'layers', 'Manuals in, cited answers out. Chunking, model tagging, anticipated-question expansion and retrieval thresholds do the work that a prompt cannot.'],
-    ['Merchant console', 'chart', 'SKUs, knowledge base, conversations, handover queue, diagnostics records and the numbers a pilot is judged on.'],
+    ['Buyer surface', 'chat', 'One page behind a signed link. No login, no app.'],
+    ['Knowledge engine', 'layers', 'Manuals in, cited answers out. Nothing invented.'],
+    ['Merchant console', 'chart', 'SKUs, sessions, hand-over queue and the numbers a pilot is judged on.'],
   ];
   return sec({
     tone: 'white',
@@ -69,7 +69,7 @@ function buyerJourney(ctx) {
     inner: `
     <div class="sechead sechead--split">
       <div>${eyebrow('The buyer session')}<h2 class="h2">Five rounds, one question at a time.</h2></div>
-      <p class="lead">A buyer writes “my drill does nothing when I press the trigger”. The agent already knows the order contains a 20V cordless model, so it does not ask what the product is — it asks whether the battery LEDs light up.</p>
+      <p class="lead">The buyer writes “my drill does nothing”. The AI already knows the model — so it asks whether the battery LEDs light up.</p>
     </div>
     <div class="split">
       <div class="split__copy">
@@ -148,7 +148,7 @@ function knowledge(ctx) {
     inner: `
     <div class="sechead sechead--split">
       <div>${eyebrow('Knowledge engine')}<h2 class="h2">Answers are retrieved, not remembered.</h2></div>
-      <p class="lead">The knowledge base is the product. A model that has read a million forum posts still does not know this SKU’s battery latch — and on power tools, a confident guess is worse than an honest hand-over.</p>
+      <p class="lead">The knowledge base is the product. A model that has read the internet still does not know this SKU’s battery latch.</p>
     </div>
     <div class="split">
       ${videoPanel(ctx, 'pdf-parsing', { caption: 'Upload, extract, review, publish — the parsing pass a merchant sees.', label: 'Manual ingestion' })}
@@ -212,8 +212,8 @@ function consoleSection(ctx) {
     id: 'console',
     inner: `
     <div class="sechead sechead--split">
-      <div>${eyebrow('Merchant console')}<h2 class="h2">The console is where the pilot is proven or fails.</h2></div>
-      <p class="lead">Every number a merchant needs to decide whether this works sits on one screen: what the AI absorbed, what it escalated, and what it saved.</p>
+      <div>${eyebrow('Merchant console')}<h2 class="h2">Every number a pilot is judged on, on one screen.</h2></div>
+      <p class="lead">What the AI absorbed, what it escalated, what it saved.</p>
     </div>
     <div class="vgrid" style="grid-template-columns:repeat(2,1fr);margin-bottom:34px">
       ${videoCard(ctx, v('customers-sessions'))}
@@ -231,7 +231,7 @@ function brand() {
     inner: `
     <div class="sechead sechead--split">
       <div>${eyebrow('Brand & language')}<h2 class="h2">The help should look like it came from the store.</h2></div>
-      <p class="lead">Branding, tone and boundaries are merchant settings, not model defaults. So is the language the buyer sees — the manuals stay in their source language.</p>
+      <p class="lead">Branding, tone and the fallback script are your settings. The manuals stay in their source language.</p>
     </div>
     <div class="grid grid-3">
       <article class="card"><div class="card__ic">${icon('spark')}</div><h3 class="h3">Voice with a fence</h3><p>A role prompt sets tone and scope; a fallback script answers when retrieval finds nothing reliable. The AI cannot improvise past either.</p></article>
@@ -251,7 +251,7 @@ function workbench(ctx) {
       <div class="split__copy">
         ${eyebrow('Where the seller already works')}
         <h2 class="h2">A workbench in the browser, not another tab.</h2>
-        <p class="lead" style="margin-top:14px">Sellers do not live in a support console. The extension generates links, looks up SKUs and shows session status next to the marketplace tab that caused the question.</p>
+        <p class="lead" style="margin-top:14px">Generate links and check sessions without leaving the marketplace tab.</p>
         <ul class="feats">
           <li>${icon('check')}Manifest V3, installed from the Chrome Web Store or unpacked</li>
           <li>${icon('check')}Token-link generation without opening the console</li>

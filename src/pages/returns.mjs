@@ -24,7 +24,7 @@ export default {
     <div>
       <p class="phero__crumbs"><a href="${l('')}">Home</a> / The returns problem</p>
       <h1>A trillion dollars comes back every year. A large share of it was never broken.</h1>
-      <p class="phero__sub">Returns are the most expensive way a seller can learn that a tool was fine. These are the third-party numbers behind the problem we are building against — not our own estimates.</p>
+      <p class="phero__sub">The third-party numbers behind the problem — not our own estimates.</p>
     </div>
     <div class="phero__aside">
       <b>Industry data, 2021–2026</b>
@@ -38,8 +38,8 @@ ${sec({
   cls: 'sec--tight',
   inner: `
   <figure class="imgband" style="margin-bottom:34px">
-    <img src="${ctx.base}img/returns-warehouse.jpg" alt="Stylised illustration of a returns warehouse stacked with cardboard boxes" width="1440" height="720" style="aspect-ratio:1440/560;object-fit:cover;object-position:center 60%">
-    <figcaption class="imgband__cap">Returns are cheap to accept and expensive to process — the cost lands weeks later, on freight, refurbishment and markdown.</figcaption>
+    <img src="${ctx.base}img/doorstep.jpg" alt="A returned drill beside its cardboard parcel on a doorstep" width="1440" height="720" style="aspect-ratio:1440/520;object-fit:cover;object-position:center 55%">
+    <figcaption class="imgband__cap">The tool works. It still comes back — and the cost lands weeks later, on freight, refurbishment and markdown.</figcaption>
   </figure>
   <div class="statgrid">
     ${[
@@ -58,7 +58,7 @@ ${sec({
   inner: `
   <div class="sechead sechead--split">
     <div>${eyebrow('The trend')}<h2 class="h2">Returns grew faster than retail did.</h2></div>
-    <p class="lead">US retail returns went from $761bn in 2021 to $890bn in 2024 — and the rate climbed from 16.6% to 16.9% of sales. Online is worse than the average: 17.6% of e-commerce orders came back in 2024, $247bn of merchandise.</p>
+    <p class="lead">Returns grew faster than retail did. Online is worse: 17.6% of orders came back in 2024.</p>
   </div>
   <div class="grid grid-2-1" style="align-items:start">
     <div class="figframe">
@@ -79,7 +79,7 @@ ${sec({
   inner: `
   <div class="sechead sechead--split">
     <div>${eyebrow('What a return costs')}<h2 class="h2">The refund is only the beginning.</h2></div>
-    <p class="lead">Industry estimates put processing at about 27% of the sale price — labour, transport, warehousing — and that is before the refund, before the markdown on the returned unit, and before the review.</p>
+    <p class="lead">About 27% of the sale price goes to processing — before the refund, before the markdown.</p>
   </div>
   <div class="grid grid-1-2" style="align-items:start">
     <div class="figframe">
@@ -120,7 +120,7 @@ ${sec({
   inner: `
   <div class="sechead sechead--split">
     <div>${eyebrow('No fault found')}<h2 class="h2">Put it on a test bench and a fifth to half of them work.</h2></div>
-    <p class="lead">“No fault found” is a measured phenomenon in warranty and returns processing, not an anecdote. Published estimates put it at 20–50% of returned electronics, and category notes single out power tools with battery systems as running high.</p>
+    <p class="lead">“No fault found” is measured, not anecdotal: 20–50% of returned electronics. Power tools with battery systems run high.</p>
   </div>
   <div class="grid grid-1-2" style="align-items:center">
     <div class="figframe">
@@ -133,7 +133,7 @@ ${sec({
       <p class="src">Sources: no-fault-found literature and industry commentary (2026); fraud share from Appriss Retail / Deloitte (2024).</p>
     </div>
     <div>
-      <p class="lead" style="margin-bottom:18px">Our own diagnostic loop targets the easiest slice of that band: the buyer whose tool needs one specific action — a pack seated, a dial clicked past a detent, a guard turned around.</p>
+      <p class="lead" style="margin-bottom:18px">We target the easiest slice: one specific action the buyer can take.</p>
       <div class="flow">
         <div class="flow__row"><span class="flow__k">Battery</span><div class="flow__v">Shipped in transport-sleep mode. The tool is silent until the pack is woken.</div></div>
         <div class="flow__row"><span class="flow__k">Mode dial</span><div class="flow__v">Stopped between drill and hammer. The chuck turns but the bit does not strike.</div></div>
@@ -171,7 +171,7 @@ ${sec({
   inner: `
   <div class="sechead sechead--split">
     <div>${eyebrow('The arithmetic')}<h2 class="h2">What it means for one seller.</h2></div>
-    <p class="lead">A mid-size Shopify seller: 6,000 orders a month, USD 60 average order value, 12% return rate. Apply the industry no-fault-found band conservatively and price the avoided return at the low end.</p>
+    <p class="lead">6,000 orders a month, USD 60 average order, 12% returns.</p>
   </div>
   <div class="grid grid-2" style="align-items:start">
     <div class="figframe">
