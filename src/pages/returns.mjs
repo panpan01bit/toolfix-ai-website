@@ -58,7 +58,7 @@ ${sec({
   inner: `
   <div class="sechead sechead--split">
     <div>${eyebrow('The trend')}<h2 class="h2">Returns grew faster than retail did.</h2></div>
-    <p class="lead">Returns grew faster than retail did. Online is worse: 17.6% of orders came back in 2024.</p>
+    <p class="lead">$761bn in 2021, $890bn in 2024. Online is worse than the average: 17.6% of orders came back.</p>
   </div>
   <div class="grid grid-2-1" style="align-items:start">
     <div class="figframe">

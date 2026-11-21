@@ -180,7 +180,7 @@ function safety() {
   <div class="wrap safetyband">
     <div>
       ${eyebrow('Safety', 'light')}
-      <h2 class="h2">If it is dangerous, a human takes over. Every time.</h2>
+      <h2 class="h2">Dangerous? A human takes over. Every time.</h2>
     </div>
     <div class="safetyband__side">
       <p class="lead" style="color:#a9b6c5;margin-bottom:18px">Smoke, sparks, a cracked disc, an injury: the conversation stops before the AI answers. Not a policy — a rule in the code.</p>
