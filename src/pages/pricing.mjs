@@ -70,7 +70,7 @@ ${sec({
       ['Support', 'Founder-led', 'Email', 'Priority', 'Priority + quarterly review'],
       ['Overage per session', 'Custom', '¥0.80', '¥0.60', '¥0.45'],
     ],
-    { firstCol: 'Included' },
+    { firstCol: 'Included', highlightCol: 3 },
   )}
   <p class="sourceline">A “diagnosis session” is one continuous multi-round resolution of one issue, not one message. Pilot overage is quoted per merchant.</p>`,
 })}

@@ -105,16 +105,18 @@ export function columns(data, { unit = '%', tone = 'teal', max = 100 } = {}) {
   </div>`;
 }
 
-export function table(head, rows, { cls = '', firstCol = '' } = {}) {
+export function table(head, rows, { cls = '', firstCol = '', highlightCol = null } = {}) {
+  const mark = (c) =>
+    String(c)
+      .replace(/^✓$/, '<span class="mark mark--yes">✓</span>')
+      .replace(/^—$/, '<span class="mark mark--no">—</span>');
+  const cellCls = (i) => [i === 0 ? 'tbl__first' : '', i === highlightCol ? 'is-hl' : ''].filter(Boolean).join(' ');
   return `<div class="tblwrap ${cls}"><table class="tbl">
-    <thead><tr>${head.map((h) => `<th${firstCol && h === firstCol ? ' class="tbl__first"' : ''}>${h}</th>`).join('')}</tr></thead>
+    <thead><tr>${head
+      .map((h, i) => `<th class="${cellCls(i)}">${h}</th>`)
+      .join('')}</tr></thead>
     <tbody>${rows
-      .map(
-        (r) =>
-          `<tr>${r
-            .map((c, i) => `<td${i === 0 ? ' class="tbl__first"' : ''}>${c}</td>`)
-            .join('')}</tr>`,
-      )
+      .map((r) => `<tr>${r.map((c, i) => `<td class="${cellCls(i)}">${mark(c)}</td>`).join('')}</tr>`)
       .join('')}</tbody>
   </table></div>`;
 }

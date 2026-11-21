@@ -69,7 +69,7 @@ function problem(l) {
       <p class="lead" style="max-width:44ch">A sleeping battery. A dial between two positions. A guard on backwards. The buyer cannot tell — so the ticket becomes a refund, and you pay freight twice.</p>
       <div class="figframe">
         <h4>US returns, USD billions</h4>
-        ${barChart(data, { unit: 'bn', height: 190 })}
+        ${barChart(data, { unit: 'bn', height: 210, annotate: '▲ 19.8% vs 2023' })}
         <p class="src">NRF × Happy Returns, 2024 · Optoro, 2024 · <a href="${l('returns/')}">full data &amp; sources</a></p>
       </div>
     </div>

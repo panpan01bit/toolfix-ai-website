@@ -64,7 +64,7 @@ ${sec({
     <div class="figframe">
       <h4>US retail returns, USD billions</h4>
       <p class="figframe__sub">2023 dips because total sales grew slower, not because behaviour changed.</p>
-      ${barChart(US_RETURNS, { unit: 'bn', height: 230 })}
+      ${barChart(US_RETURNS, { unit: 'bn', height: 260, annotate: '▲ 19.8% vs 2023' })}
       <p class="src">Source: NRF &amp; Happy Returns, December 2024; NRF &amp; Appriss Retail, December 2022.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px">

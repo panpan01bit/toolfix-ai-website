@@ -4117,3 +4117,168 @@ body.zh .h2 {
   object-fit: cover;
   width: 100%;
 }
+
+/* ==========================================================================
+   Chart + table polish — richer, less "flat spreadsheet"
+   ========================================================================== */
+:root {
+  --chart-grid: rgba(11, 28, 40, 0.09);
+  --chart-bar-top: #1cb8b0;
+  --chart-bar-bot: #0c7a76;
+  --chart-hl-top: #f4b761;
+  --chart-hl-bot: #dc871a;
+  --chart-ann-bg: #fdf2df;
+}
+.chartwrap {
+  position: relative;
+  margin-top: 6px;
+}
+.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.chart-v {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.chart-x {
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  fill: var(--muted-2);
+}
+.chart-ann {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 600;
+  fill: #7a4f12;
+}
+.sec--night {
+  --chart-grid: rgba(255, 255, 255, 0.1);
+}
+.sec--night .chart-v {
+  fill: #fff;
+}
+.sec--night .chart-x {
+  fill: #9ca9b8;
+}
+
+/* richer tables */
+.tbl {
+  font-size: 0.95rem;
+}
+.tbl th {
+  padding: 16px 18px;
+  background: #f7f7f1;
+}
+.tbl td {
+  padding: 16px 18px;
+  font-variant-numeric: tabular-nums;
+}
+.tbl tbody tr:nth-child(even) td {
+  background: #fcfcf7;
+}
+.tbl tbody tr:hover td {
+  background: #f7f7ef;
+}
+.tbl td.tbl__first {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.tbl td strong {
+  font-size: 0.98rem;
+}
+
+/* comparison table */
+.compare td,
+.compare th {
+  padding: 16px 18px;
+  font-size: 0.92rem;
+}
+.compare tbody tr:nth-child(even) td {
+  background: #fcfcf7;
+}
+.compare tbody tr:nth-child(even) td.is-self {
+  background: rgba(20, 160, 160, 0.08);
+}
+.compare thead th.is-self {
+  background: rgba(20, 160, 160, 0.14);
+  color: var(--teal-deep);
+}
+.compare .yes {
+  color: #0d6f63;
+  font-weight: 600;
+}
+.compare .yes::before {
+  content: '✓';
+  display: inline-block;
+  margin-right: 5px;
+  color: #14a0a0;
+}
+.compare .no {
+  color: #9aa0a0;
+}
+.compare .no::before {
+  content: '×';
+  display: inline-block;
+  margin-right: 5px;
+  color: #c2c6c3;
+  font-size: 1.05em;
+}
+.compare .part {
+  color: #8a5d13;
+}
+.compare .part::before {
+  content: '~';
+  display: inline-block;
+  margin-right: 5px;
+  color: #d79a35;
+}
+
+/* horizontal bars: gradient + value chip */
+.hbar__t {
+  height: 10px;
+  background: #eef0e7;
+  border-radius: 100px;
+}
+.hbar__t i {
+  background: linear-gradient(90deg, #1cb8b0, #0c7a76);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
+.hbars--amber .hbar__t i {
+  background: linear-gradient(90deg, #f4b761, #dc871a);
+}
+.hbar__v {
+  background: #f4f5ee;
+  border-radius: 5px;
+  padding: 3px 8px;
+  justify-self: end;
+}
+.sec--night .hbar__v {
+  background: rgba(255, 255, 255, 0.08);
+}
+.toolcard__img {
+  background: linear-gradient(180deg, #fdfdf9, #f5f5ee);
+}
+
+.mark--yes {
+  color: #0d8a7a;
+  font-weight: 700;
+}
+.mark--no {
+  color: #c3c7c2;
+}
+.tbl .is-hl {
+  background: rgba(20, 160, 160, 0.06);
+}
+.tbl thead .is-hl {
+  background: rgba(20, 160, 160, 0.14);
+  color: var(--teal-deep);
+}
+.tbl tbody tr:nth-child(even) td.is-hl {
+  background: rgba(20, 160, 160, 0.09);
+}

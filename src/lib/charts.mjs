@@ -2,27 +2,75 @@
 
 const fmt = (n) => n.toLocaleString('en-US');
 
-/** Vertical bars with axis labels and values. */
-export function barChart(series, { unit = '', height = 200, accent = 'var(--teal)', highlightLast = true } = {}) {
-  const max = Math.max(...series.map((d) => d.value)) * 1.08;
-  const bw = 100 / series.length;
-  const bars = series
-    .map((d, i) => {
-      const h = (d.value / max) * 100;
-      const isLast = highlightLast && i === series.length - 1;
-      return `<div class="chart__col">
-        <span class="chart__v">${d.label ? '' : ''}${fmt(d.value)}${unit}</span>
-        <span class="chart__track"><i style="height:${h}%;background:${isLast ? 'var(--amber)' : accent}" class="${d.dim ? 'is-dim' : ''}"></i></span>
-        <span class="chart__x">${d.x}</span>
-      </div>`;
+/**
+ * Vertical bars with gridlines, gradient fills, value labels and an optional
+ * highlight + annotation on the final bar.
+ */
+export function barChart(series, { unit = '', height = 300, highlightLast = true, annotate = '' } = {}) {
+  const W = 720;
+  const H = height;
+  const padL = 10;
+  const padR = 10;
+  const padT = 60;
+  const padB = 40;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+  const max = Math.max(...series.map((d) => d.value)) * 1.14;
+  const slot = plotW / series.length;
+  const bw = Math.min(slot * 0.58, 108);
+
+  const grid = [0, 0.25, 0.5, 0.75, 1]
+    .map((t) => {
+      const y = padT + plotH - plotH * t;
+      return `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="var(--chart-grid)" stroke-width="1"/>`;
     })
     .join('');
-  return `<div class="chart" style="--chart-h:${height}px">${bars}</div>`;
+
+  const bars = series
+    .map((d, i) => {
+      const h = Math.max(2, (d.value / max) * plotH);
+      const x = padL + slot * i + (slot - bw) / 2;
+      const y = padT + plotH - h;
+      const last = highlightLast && i === series.length - 1;
+      return `<g>
+        <rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="6"
+          fill="url(#${last ? 'g-hl' : 'g-bar'})"/>
+        <text x="${(x + bw / 2).toFixed(1)}" y="${(y - 14).toFixed(1)}" text-anchor="middle" class="chart-v">${fmt(d.value)}${unit}</text>
+        <text x="${(x + bw / 2).toFixed(1)}" y="${padT + plotH + 24}" text-anchor="middle" class="chart-x">${d.x}</text>
+      </g>`;
+    })
+    .join('');
+
+  const lastBar = series[series.length - 1];
+  const ann = annotate
+    ? `<g>
+        <rect x="${W - padR - 132}" y="8" width="122" height="26" rx="13" fill="var(--chart-ann-bg)"/>
+        <text x="${W - padR - 71}" y="26" text-anchor="middle" class="chart-ann">${annotate}</text>
+      </g>`
+    : '';
+
+  return `<div class="chartwrap">
+    <svg viewBox="0 0 ${W} ${H}" class="chart-svg" role="img" aria-label="Bar chart: ${series.map((d) => `${d.x} ${fmt(d.value)}${unit}`).join(', ')}">
+      <defs>
+        <linearGradient id="g-bar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--chart-bar-top)"/>
+          <stop offset="100%" stop-color="var(--chart-bar-bot)"/>
+        </linearGradient>
+        <linearGradient id="g-hl" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--chart-hl-top)"/>
+          <stop offset="100%" stop-color="var(--chart-hl-bot)"/>
+        </linearGradient>
+      </defs>
+      ${grid}
+      ${bars}
+      ${ann}
+    </svg>
+  </div>`;
 }
 
-/** Horizontal comparison bars, labelled. */
+/** Horizontal comparison bars with gradient fills and value chips. */
 export function hBars(items, { max = null, unit = '%', tone = '' } = {}) {
-  const m = max || Math.max(...items.map((d) => d.value)) * 1.1;
+  const m = max || Math.max(...items.map((d) => d.value)) * 1.12;
   return `<div class="hbars ${tone ? 'hbars--' + tone : ''}">
     ${items
       .map(
