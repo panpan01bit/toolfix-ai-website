@@ -27,7 +27,7 @@ export function chatMockup(ctx, {
        <div class="bubble bubble--ai">That usually means the battery pack is not seated all the way. Does it click in firmly when you push it?<span class="bubble__src">FD1104071 · User manual</span></div>
        <div class="chips"><span>It clicks</span><span>No sound at all</span></div>
        <div class="guidecard">
-         <div class="guidecard__img" style="background-image:url(${ctx.base}img/battery-closeup.jpg)"></div>
+         <div class="guidecard__img" style="background-image:url(${ctx.base}img/tool-drill.jpg)"></div>
          <div class="guidecard__t"><small>STEP 2 OF 4</small><b>Seat the pack until it clicks</b><span>Open the guide →</span></div>
        </div>`;
 
