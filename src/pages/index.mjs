@@ -11,12 +11,13 @@ export default {
     'Stop refunding tools that were never broken. ToolFix AI answers buyers from your own manuals, resolves false faults in minutes and hands the real ones to your team with the evidence attached.',
   body: (ctx) => {
     const l = (p) => href(ctx, p);
-    return [hero(ctx, l), problem(l), band(ctx), how(ctx, l), coverage(ctx), benefits(l), safety(), proof(l), cta(l)].join('\n');
+    return [hero(ctx, l), problem(l), band(ctx), how(ctx, l), coverage(ctx), benefits(l), safety(ctx), proof(l), cta(l)].join('\n');
   },
 };
 
 function hero(ctx, l) {
   return `<section class="hero">
+  <div class="hero__photo" style="background-image:url(${ctx.base}img/hero-workshop.jpg)"></div>
   <div class="hero__grid"></div><div class="hero__glow"></div>
   <div class="wrap hero__in">
     <div>
@@ -175,17 +176,20 @@ function benefits(l) {
   });
 }
 
-function safety() {
-  return `<section class="sec sec--night sec--tight">
+function safety(ctx) {
+  return `<section class="sec sec--night" id="safety">
   <div class="wrap safetyband">
     <div>
       ${eyebrow('Safety', 'light')}
       <h2 class="h2">Dangerous? A human takes over. Every time.</h2>
-    </div>
-    <div class="safetyband__side">
-      <p class="lead" style="color:#a9b6c5;margin-bottom:18px">Smoke, sparks, a cracked disc, an injury: the conversation stops before the AI answers. Not a policy — a rule in the code.</p>
+      <p class="lead" style="color:#a9b6c5;margin:18px 0 22px;max-width:40ch">Smoke, sparks, a cracked disc, an injury: the conversation stops before the AI answers.</p>
       <div class="pills">${['Smoke', 'Sparks', 'Cracked disc', 'Damaged cord', 'Swollen battery', 'Injury'].map((p) => `<span class="pill">${p}</span>`).join('')}</div>
+      <p class="note" style="color:#7f8ca0;margin-top:22px">Not a policy document — a rule in the code, checked every round, outside the model.</p>
     </div>
+    <figure class="safetyband__fig">
+      <img src="${ctx.base}img/safety.jpg" alt="A worn cutting disc with a visible crack on an angle grinder" width="1600" height="1066" loading="eager" decoding="async">
+      <figcaption>Cracked disc · 96% of enterprises say a human must handle it</figcaption>
+    </figure>
   </div>
 </section>`;
 }

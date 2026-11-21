@@ -4282,3 +4282,43 @@ body.zh .h2 {
 .tbl tbody tr:nth-child(even) td.is-hl {
   background: rgba(20, 160, 160, 0.09);
 }
+
+/* photographic hero backdrop + safety figure */
+.hero__photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 60%;
+  opacity: 0.34;
+  filter: saturate(0.9) contrast(0.95);
+  mask-image: linear-gradient(90deg, rgba(0,0,0,.15), #000 55%, #000);
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.15), #000 55%, #000);
+  pointer-events: none;
+}
+.hero > .hero__photo ~ .hero__grid {
+  opacity: 0.7;
+}
+.safetyband__fig {
+  margin: 0;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.safetyband__fig img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  aspect-ratio: 4 / 3;
+}
+.safetyband__fig figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 16px;
+  font-size: 0.76rem;
+  color: #e8eef4;
+  background: linear-gradient(transparent, rgba(8, 13, 24, 0.9));
+}
